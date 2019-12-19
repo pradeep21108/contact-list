@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    
+    <body>
+        <div ng-app="MyApp" ng-controller="MyCtrl" class="container">
+        <header><h1>Contact List</h1></header>
+        <table class="table table-dark table-hover" style="width:500px;">
+            <tr><th>Name</th><th>Contact No</th><th>Del</th></tr>
+        <tr ng-repeat="x in contacts">            
+            <td >{{x.name.toUpperCase()}}</td>
+            <td>{{x.PhNumber}}</td>
+            <td ng-click="removeNum($index)">X</td>
+        <tr>
+    </table>
+    <input type="text" ng-model="cName" placeholder="Contact Name" style="width:500px;" class="form-control form-control-sm" required>
+    <input type="number" ng-model="cNumber" placeholder="Contact Number" style="width:500px;" class="form-control form-control-sm" required>
+    <button ng-click="addPhNum()"type="button" class="btn btn-success">Add</button>
+    <p>{{ErrorMsg}}</p>
+    </div>
+       
+       <script>
+        var app = angular.module("MyApp",[]);
+        app.controller("MyCtrl", function($scope){
+            
+            $scope.contacts=[{name:"pradeep", PhNumber:7829744718},
+                            {name:"kalia", PhNumber:8660264046},
+                            {name:"dipu", PhNumber:7829744719}];
+            
+            $scope.addPhNum = function(){
+            
+                $scope.contacts.push({name:$scope.cName,PhNumber:$scope.cNumber});
+            }
+            
+            $scope.removeNum = function(x){
+                $scope.contacts.splice(x,1);
+            }
+        })
+        </script>
+    </body>
+</html>
